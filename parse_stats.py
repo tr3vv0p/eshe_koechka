@@ -6,7 +6,7 @@ import re
 #import footballdata
 
 
-url = 'http://www.whoscored.com/Matches/829726/Live/England-Premier-League-2014-2015-Stoke-Manchester-United'
+url = 'http://www.whoscored.com/Matches/1284761/Live/England-Premier-League-2018-2019-Arsenal-West-Ham'
 params = {}
 
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36',
@@ -38,7 +38,7 @@ headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML
 
 r = requests.get(url,  headers=headers)
 
-json_req = json.loads(response.text)
+# json_req = json.loads(response.text)
 
 from bs4 import BeautifulSoup
 soup = BeautifulSoup(r.content, "html.parser")
@@ -49,10 +49,11 @@ data = soup.find("a", href="/ContactUs").find_next("script").text
 d = json.dumps(data_cen.search(data).group(1))
 e = json.dumps(event_type.search(data).group(1))
 
-with open('data-bs4.json', 'w') as outfile:
-    json.dump(d, outfile)
+
 
 data_dict = json.loads(d)
 event_dict = json.loads(e)
+
+
 print(event_dict)
 print(data_dict)
